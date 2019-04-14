@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1025480961084",
+    "firebase_url": "https://todo-6f42f.firebaseio.com",
+    "project_id": "todo-6f42f",
+    "storage_bucket": "todo-6f42f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025480961084:android:16f9801d4e4bf845",
+        "android_client_info": {
+          "package_name": "com.example.hello_wrold"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025480961084-9j11j5mjhdf3cc3on0h15ph16h0edg0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYxpbLA-UhW0-DiavSSijS8Ltn86_Rcmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025480961084-9j11j5mjhdf3cc3on0h15ph16h0edg0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
