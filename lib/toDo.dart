@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import './item.dart';
 
 void showSnackbar(text, context) {
@@ -9,9 +11,9 @@ Function looseFocus =
     (context) => FocusScope.of(context).requestFocus(new FocusNode());
 
 class ToDo extends StatefulWidget {
-  ToDo({Key key, this.title}) : super(key: key);
-
   final String title;
+  final String uuid;
+  ToDo({Key key, this.title, this.uuid}) : super(key: key);
 
   @override
   _ToDoState createState() => _ToDoState();
@@ -22,6 +24,7 @@ class _ToDoState extends State<ToDo> {
     {'title': 'Clean my house', 'done': false}
   ];
   final inputCtrl = TextEditingController();
+  final Firestore _db = Firestore.instance;
 
   void _updateItem(newItem, index) {
     setState(() {
@@ -48,56 +51,76 @@ class _ToDoState extends State<ToDo> {
     super.dispose();
   }
 
-  Widget _buildItem(context, index) {
-    return Dismissible(
-        background: Container(color: Colors.red),
-        // Each Dismissible must contain a Key. Keys allow Flutter to
-        // uniquely identify Widgets.
-        key: Key(items[index]['title']),
-        // We also need to provide a function that will tell our app
-        // what to do after an item has been swiped away.
-        onDismissed: (direction) {
-          // Show a snackbar! This snackbar could also contain "Undo" actions.
-          showSnackbar("${items[index]['title']} dismissed", context);
+  Widget _buildItem() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _db.collection('users').snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
+        switch (snapshot.connectionState) {
+          default:
+            print(widget.uuid);
+            final userObject = snapshot.data.documents
+                .where((DocumentSnapshot document) =>
+                    document['uid'] == widget.uuid)
+                .first;
+            print(userObject.data);
+            final items = userObject['items'];
+            print(items);
+            return ListView(
+                children: items
+                    .map<Widget>((item) => Dismissible(
+                        background: Container(color: Colors.red),
+                        // Each Dismissible must contain a Key. Keys allow Flutter to
+                        // uniquely identify Widgets.
+                        key: Key(item['title']),
+                        // We also need to provide a function that will tell our app
+                        // what to do after an item has been swiped away.
+                        onDismissed: (direction) {
+                          // Show a snackbar! This snackbar could also contain "Undo" actions.
+                          showSnackbar("${item['title']} dismissed", context);
 
-          // Remove the item from our data source.
-          setState(() {
-            items.removeAt(index);
-          });
-        },
-        child: GestureDetector(
-          child: ListTile(
-            trailing: IconButton(
-              icon: Icon(items[index]['done']
-                  ? Icons.check_box
-                  : Icons.check_box_outline_blank),
-              color: Colors.redAccent,
-              onPressed: () {
-                setState(() {
-                  items[index]['done'] = !items[index]['done'];
-                });
-              },
-            ),
-            title: Text(
-              items[index]['title'],
-              style: TextStyle(
-                  decoration: items[index]['done']
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none),
-            ),
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Item(
-                        item: items[index],
-                        index: index,
-                        onSaveButton: _updateItem,
-                      )),
-            );
-          },
-        ));
+                          // Remove the item from our data source.
+                          // setState(() {
+                          //   items.removeAt(index);
+                          // });
+                        },
+                        child: GestureDetector(
+                          child: ListTile(
+                            trailing: IconButton(
+                              icon: Icon(item['done']
+                                  ? Icons.check_box
+                                  : Icons.check_box_outline_blank),
+                              color: Colors.redAccent,
+                              onPressed: () {
+                                setState(() {
+                                  item['done'] = !item['done'];
+                                });
+                              },
+                            ),
+                            title: Text(
+                              item['title'],
+                              style: TextStyle(
+                                  decoration: item['done']
+                                      ? TextDecoration.lineThrough
+                                      : TextDecoration.none),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Item(
+                                        item: item,
+                                        index: 0,
+                                        onSaveButton: _updateItem,
+                                      )),
+                            );
+                          },
+                        )))
+                    .toList());
+        }
+      },
+    );
   }
 
   @override
@@ -117,10 +140,7 @@ class _ToDoState extends State<ToDo> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: _buildItem,
-              ),
+              child: _buildItem(),
             ),
           ],
         ),

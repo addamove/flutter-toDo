@@ -1,0 +1,1200 @@
+/* CSS Resets */
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,q,small,strong,sub,sup,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
+{border:0;margin:0;padding:0}
+article,aside,figure,figure img,figcaption,hgroup,footer,header,nav,section,video,object
+{display:block}
+a img{border:0}
+figure{position:relative}
+figure img{width:100%}
+
+/* scrol-bar */
+
+html { overflow: auto; }
+
+
+/* collors */
+
+.black{
+  background-color: black;
+  color: white;
+}
+
+/* textFlip */
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+@keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+.flipInX {
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  -webkit-animation-name: flipInX;
+  animation-name: flipInX;
+}
+
+/* nav */
+
+/**
+ * Переключаемая боковая панель навигации
+ * выдвигающаяся по клику слева
+ */
+
+.nav {
+    width: 320px;
+    min-width: 320px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    left: -320px;
+    padding: 15px 20px;
+    -webkit-transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    transition: left 0.3s;
+    z-index: 2000;
+}
+
+
+
+.nav-toggle {
+    position: absolute;
+    /* относительно левого края панели */
+    left: 320px;
+    /* отступ от верхнего края панели */
+    top: 1em;
+    /* внутренние отступы */
+    padding: 0.5em;
+    /* определяем цвет фона переключателя
+     * чаще вчего в соответствии с цветом фона панели
+    */
+    background: inherit;
+    /* цвет текста */
+    color: #dadada;
+    /* вид курсора */
+    cursor: pointer;
+    /* размер шрифта */
+    font-size: 1.2em;
+    line-height: 1;
+    /* всегда поверх других элементов страницы */
+    z-index: 2001;
+    /* анимируем цвет текста при наведении */
+    -webkit-transition: color .25s ease-in-out;
+    -moz-transition: color .25s ease-in-out;
+    transition: color .25s ease-in-out;
+}
+
+/* определяем текст кнопки
+ * символ Unicode (TRIGRAM FOR HEAVEN)
+*/
+
+.nav-toggle:after {
+    content: '\2630';
+    text-decoration: none;
+}
+
+/* цвет текста при наведении */
+
+.nav-toggle:hover {
+    color: #f4f4f4;
+}
+
+/**
+ * Скрытый чекбокс (флажок)
+ * невидим и недоступен :)
+ * имя селектора атрибут флажка
+ */
+
+[id='nav-toggle'] {
+    position: absolute;
+    display: none;
+}
+
+
+[id='nav-toggle']:checked ~ .nav > .nav-toggle {
+    left: auto;
+    right: 2px;
+    top: 1em;
+}
+
+
+[id='nav-toggle']:checked ~ .nav {
+    left: 0;
+    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+    -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+    -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+    overflow-y: auto;
+}
+
+
+[id='nav-toggle']:checked ~ main > article {
+    -webkit-transform: translateX(320px);
+    -moz-transform: translateX(320px);
+    transform: translateX(320px);
+}
+
+
+[id='nav-toggle']:checked ~ .nav > .nav-toggle:after {
+    content: '\2715';
+}
+
+
+body {
+    -webkit-animation: bugfix infinite 1s;
+}
+
+@-webkit-keyframes bugfix {
+    to {
+      padding: 0;
+    }
+}
+
+
+@media screen and (min-width: 320px) {
+    html,
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    html,
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .nav {
+      width: 100%;
+      box-shadow: none
+    }
+}
+
+/**
+ * Формируем стиль заголовка (логотип) панели
+*/
+
+.nav h2 {
+    width: 90%;
+    padding: 0;
+    margin: 10px 0;
+    text-align: center;
+    text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;
+    font-size: 1.3em;
+    line-height: 1.3em;
+    opacity: 0;
+    transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -webkit-transform: scale(0.1, 0.1);
+    transform-origin: 0% 0%;
+    -ms-transform-origin: 0% 0%;
+    -moz-transform-origin: 0% 0%;
+    -webkit-transform-origin: 0% 0%;
+    transition: opacity 0.8s, transform 0.8s;
+    -ms-transition: opacity 0.8s, -ms-transform 0.8s;
+    -moz-transition: opacity 0.8s, -moz-transform 0.8s;
+    -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;
+}
+
+.nav h2 a {
+    color: #dadada;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+/*плавное появление заголовка (логотипа) при раскрытии панели */
+
+[id='nav-toggle']:checked ~ .nav h2 {
+    opacity: 1;
+    transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+}
+
+/**
+ * формируем непосредственно само меню
+ * используем неупорядоченный список для пунктов меню
+ * прикрутим трансфомации и плавные переходы
+ */
+
+.nav > ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav > ul > li {
+    line-height: 2.5;
+    opacity: 0;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;
+    -moz-transition: opacity .5s .1s, -moz-transform .5s .1s;
+    -ms-transition: opacity .5s .1s, -ms-transform .5s .1s;
+    transition: opacity .5s .1s, transform .5s .1s;
+}
+
+[id='nav-toggle']:checked ~ .nav > ul > li {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+}
+
+/* определяем интервалы появления пунктов меню */
+
+.nav > ul > li:nth-child(2) {
+    -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;
+    transition: opacity .5s .2s, transform .5s .2s;
+}
+
+.nav > ul > li:nth-child(3) {
+    -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;
+    transition: opacity .5s .3s, transform .5s .3s;
+}
+
+.nav > ul > li:nth-child(4) {
+    -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;
+    transition: opacity .5s .4s, transform .5s .4s;
+}
+
+.nav > ul > li:nth-child(5) {
+    -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;
+    transition: opacity .5s .5s, transform .5s .5s;
+}
+
+.nav > ul > li:nth-child(6) {
+    -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;
+    transition: opacity .5s .6s, transform .5s .6s;
+}
+
+.nav > ul > li:nth-child(7) {
+    -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;
+    transition: opacity .5s .7s, transform .5s .7s;
+}
+
+
+/**
+ * оформление ссылок пунктов меню
+ */
+
+.nav > ul > li > a {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.2em;
+    color: #dadada;
+    width: 100%;
+    text-decoration: none;
+    /* плавный переход */
+    -webkit-transition: color .5s ease, padding .5s ease;
+    -moz-transition: color .5s ease, padding .5s ease;
+    transition: color .5s ease, padding .5s ease;
+}
+
+/**
+ * состояние ссылок меню при наведении
+ */
+
+.nav > ul > li > a:hover,
+.nav > ul > li > a:focus {
+    color: white;
+    padding-left: 15px;
+}
+
+/**
+ * линия подчеркивания ссылок меню
+ */
+
+.nav > ul > li > a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    -webkit-transition: width 0s ease;
+    transition: width 0s ease;
+}
+
+.nav > ul > li > a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    -webkit-transition: width .5s ease;
+    transition: width .5s ease;
+}
+
+/**
+ * анимируем линию подчеркивания
+ * ссылок при наведении
+ */
+
+.nav > ul > li > a:hover:before {
+    width: 0%;
+    background: #3bc1a0;
+    -webkit-transition: width .5s ease;
+    transition: width .5s ease;
+}
+
+.nav > ul > li > a:hover:after {
+    width: 0%;
+    background: transparent;
+    -webkit-transition: width 0s ease;
+    transition: width 0s ease;
+}
+
+
+/* tooltips */
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative; /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none; /* opinion 2 */
+  font-size: .9em; /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent; /* opinion 4 */
+  z-index: 1001; /* absurdity 1 */
+}
+[tooltip]::after {
+  content: attr(tooltip); /* magic! */
+
+  /* most of the rest of this is opinion */
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+
+  /*
+    Let the content set the size of the tooltips
+    but this will also keep them from being obnoxious
+    */
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: .3ch;
+  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000; /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+/* img animation */
+.grid {
+padding: 20px 20px 100px 20px;
+max-width: 1300px;
+margin: 0 auto;
+list-style: none;
+text-align: center;
+}
+
+.grid li {
+display: inline-block;
+width: 440px;
+margin: 0;
+padding: 20px;
+text-align: left;
+position: relative;
+}
+
+.grid figure {
+	margin: 0;
+	position: relative;
+}
+
+.grid figure img {
+	max-width: 100%;
+	display: block;
+	position: relative;
+}
+
+.grid figcaption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 20px;
+	background: #2c3f52;
+	color: #ed4e6e;
+}
+
+.grid figcaption h3 {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+
+.grid figcaption span:before {
+	content: 'by ';
+}
+
+.grid figcaption a {
+	text-align: center;
+	padding: 5px 10px;
+	border-radius: 2px;
+	display: inline-block;
+	background: #ed4e6e;
+	color: #fff;
+}
+
+@media screen and (max-width: 31.5em) {
+	.grid {
+		padding: 10px 10px 100px 10px;
+	}
+	.grid li {
+		width: 100%;
+		min-width: 300px;
+	}
+}
+
+.if-x-card-animate-1 figcaption {
+	height: 100%;
+	width: 90%;
+	opacity: 0;
+	text-align: center;
+	backface-visibility: hidden;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.if-x-card-animate-1 figure:hover figcaption,
+.if-x-card-animate-1 figure.if-x-hover figcaption {
+	opacity: 1;
+	transform: translate(15px, 15px);
+}
+
+.if-x-card-animate-1 figcaption h3 {
+	margin-top: 70px;
+}
+
+.if-x-card-animate-1 figcaption span {
+	display: block;
+}
+
+.if-x-card-animate-1 figcaption a {
+	margin-top: 30px;
+}
+
+.if-x-card-animate-2 figure img {
+	z-index: 10;
+	transition: transform 0.4s;
+}
+
+.if-x-card-animate-2 figure:hover img,
+.if-x-card-animate-2 figure.if-x-hover img {
+	transform: translateY(-90px);
+}
+
+.if-x-card-animate-2 figcaption {
+  height: 65px;
+  width: 91%;
+	top: auto;
+	bottom: 0;
+}
+
+.if-x-card-animate-2 figcaption a {
+	position: absolute;
+	right: 20px;
+	top: 30px;
+}
+
+.if-x-card-animate-3 figure {
+	overflow: hidden;
+}
+
+.if-x-card-animate-3 figure img {
+	transition: transform 0.4s;
+}
+
+ .if-x-card-animate-3 figure:hover img,
+.if-x-card-animate-3 figure.if-x-hover img {
+	transform: translateY(-50px);
+}
+
+.if-x-card-animate-3 figcaption {
+  height: 65px;
+  width: 91%;
+	top: auto;
+	bottom: 0;
+	opacity: 0;
+	transform: translateY(100%);
+	transition: transform 0.4s, opacity 0.1s 0.3s;
+}
+
+ .if-x-card-animate-3 figure:hover figcaption,
+.if-x-card-animate-3 figure.if-x-hover figcaption {
+	opacity: 1;
+	transform: translateY(0px);
+	transition: transform 0.4s, opacity 0.1s;
+}
+
+
+
+.if-x-card-animate-3 figcaption a {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.if-x-card-animate-4 li {
+	perspective: 1700px;
+	perspective-origin: 0 50%;
+}
+
+.if-x-card-animate-4 figure {
+	transform-style: preserve-3d;
+}
+
+.if-x-card-animate-4 figure > div {
+	overflow: hidden;
+}
+
+.if-x-card-animate-4 figure img {
+	transition: transform 0.4s;
+}
+
+ .if-x-card-animate-4 figure:hover img,
+.if-x-card-animate-4 figure.if-x-hover img {
+	transform: translateX(25%);
+}
+
+.if-x-card-animate-4 figcaption {
+	height: 100%;
+	width: 50%;
+	opacity: 0;
+	backface-visibility: hidden;
+	transform-origin: 0 0;
+	transform: rotateY(-90deg);
+	transition: transform 0.4s, opacity 0.1s 0.3s;
+}
+
+ .if-x-card-animate-4 figure:hover figcaption,
+.if-x-card-animate-4 figure.if-x-hover figcaption {
+	opacity: 1;
+	transform: rotateY(0deg);
+	transition: transform 0.4s, opacity 0.1s;
+}
+
+.if-x-card-animate-4 figcaption a {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.if-x-card-animate-5 figure img {
+	z-index: 10;
+	transition: transform 0.4s;
+}
+
+ .if-x-card-animate-5 figure:hover img,
+.if-x-card-animate-5 figure.if-x-hover img {
+	transform: scale(0.4);
+}
+
+.if-x-card-animate-5 figcaption {
+	height: 100%;
+	width: 90%;
+	opacity: 0;
+	transform: scale(0.7);
+	backface-visibility: hidden;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+ .if-x-card-animate-5 figure:hover figcaption,
+.if-x-card-animate-5 figure.if-x-hover figcaption {
+	transform: scale(1);
+	opacity: 1;
+}
+
+.if-x-card-animate-5 figure a {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.if-x-card-animate-6 figure img {
+	z-index: 10;
+	transition: transform 0.4s;
+}
+
+ .if-x-card-animate-6 figure:hover img,
+.if-x-card-animate-6 figure.if-x-hover img {
+	transform: translateY(-50px) scale(0.5);
+}
+
+.if-x-card-animate-6 figcaption {
+	height: 100%;
+	width: 90%;
+}
+
+.if-x-card-animate-6 figcaption h3 {
+	margin-top: 60%;
+}
+
+.if-x-card-animate-6 figcaption a {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.if-x-card-animate-7 li:first-child { z-index: 6; }
+.if-x-card-animate-7 li:nth-child(2) { z-index: 5; }
+.if-x-card-animate-7 li:nth-child(3) { z-index: 4; }
+.if-x-card-animate-7 li:nth-child(4) { z-index: 3; }
+.if-x-card-animate-7 li:nth-child(5) { z-index: 2; }
+.if-x-card-animate-7 li:nth-child(6) { z-index: 1; }
+
+.if-x-card-animate-7 figure img {
+	z-index: 10;
+}
+
+.if-x-card-animate-7 figcaption {
+	height: 100%;
+	width: 90%;
+	opacity: 0;
+	backface-visibility: hidden;
+	box-shadow: 0 0 0 0px #2c3f52;
+	transition: opacity 0.3s, height 0.3s, box-shadow 0.3s;
+}
+
+ .if-x-card-animate-7 figure:hover figcaption,
+.if-x-card-animate-7 figure.if-x-hover figcaption {
+	opacity: 1;
+	height: 130%;
+	box-shadow: 0 0 0 10px #2c3f52;
+}
+
+.if-x-card-animate-7 figcaption h3 {
+	margin-top: 86%;
+}
+
+.if-x-card-animate-7 figcaption h3,
+.if-x-card-animate-7 figcaption span,
+.if-x-card-animate-7 figcaption a {
+	opacity: 0;
+	transition: opacity 0s;
+}
+
+.if-x-card-animate-7 figcaption a {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+ .if-x-card-animate-7 figure:hover figcaption h3,
+ .if-x-card-animate-7 figure:hover figcaption span,
+ .if-x-card-animate-7 figure:hover figcaption a,
+.if-x-card-animate-7 figure.if-x-hover figcaption h3,
+.if-x-card-animate-7 figure.if-x-hover figcaption span,
+.if-x-card-animate-7 figure.if-x-hover figcaption a {
+	transition: opacity 0.3s 0.2s;
+	opacity: 1;
+}
+
+/* Hover animations */
+
+.if-x-zoom:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+@-webkit-keyframes if-x-rotate {
+
+  30% {
+    -webkit-transform: rotateZ(20deg);
+    transform: rotateZ(20deg);
+
+  }
+  50% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+
+  }
+  100% {
+    -webkit-transform: rotateZ(-20deg);
+    transform: rotateZ(-20deg);
+  }
+}
+
+@keyframes if-x-rotate {
+  30% {
+    -webkit-transform: rotateZ(20deg);
+    transform: rotateZ(20deg);
+
+  }
+  50% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+
+  }
+  100% {
+    -webkit-transform: rotateZ(-20deg);
+    transform: rotateZ(-20deg);
+  }
+}
+
+@-webkit-keyframes if-x-fear {
+  15% {
+    -webkit-transform: translateX(9px);
+    transform: translateX(9px);
+  }
+  30% {
+    -webkit-transform: translateX(-9px);
+    transform: translateX(-9px);
+  }
+  40% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px);
+  }
+  50% {
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+  }
+  65% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes if-x-fear {
+  15% {
+    -webkit-transform: translateX(9px);
+    transform: translateX(9px);
+  }
+  30% {
+    -webkit-transform: translateX(-9px);
+    transform: translateX(-9px);
+  }
+  40% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px);
+  }
+  50% {
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+  }
+  65% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+
+/* if(x):UI */
+
+.container {
+padding-left: 20px;
+padding-right: 20px;
+}
+
+.row {
+width: 100%;
+max-width: 1140px;
+min-width: 755px;
+margin-left: auto !important;
+margin-right: auto !important;
+}
+
+.ifx-1, .ifx-2, .ifx-3, .ifx-4, .ifx-5, .ifx-6, .ifx-7, .ifx-8, .ifx-9, .ifx-10, .ifx-11 {
+margin-right: 3.8%;
+float: left;
+min-height: 1px;
+}
+
+.row .ifx-1 {
+width: 4.85%;
+}
+
+.row .ifx-2 {
+width: 13.45%;
+}
+
+.row .ifx-3 {
+width: 22.05%;
+}
+
+.row .ifx-4 {
+width: 30.75%;
+}
+
+.row .ifx-5 {
+width: 39.45%;
+}
+
+.row .ifx-6 {
+width: 48%;
+}
+
+.row .ifx-7 {
+width: 56.75%;
+}
+
+.row .ifx-8 {
+width: 65.4%;
+}
+
+.row .ifx-9 {
+width: 74.05%;
+}
+
+.row .ifx-10 {
+width: 82.7%;
+}
+
+.row .ifx-11 {
+width: 91.35%;
+}
+
+.row .ifx-12 {
+width: 100%;
+float: left;
+}
+
+.last {
+margin-right: 0px;
+}
+
+img, object, embed {
+max-width: 100%;
+}
+
+img {
+	height: auto;
+}
+
+
+@media only screen and (max-width: 1023px) {
+
+	body {
+	font-size: 0.8em;
+	line-height: 1.5em;
+	}
+
+	}
+
+@media mobile, only screen and (max-width: 767px) {
+
+	body {
+	font-size: 16px;
+	-webkit-text-size-adjust: none;
+	}
+
+	.row, body, .container {
+	width: 100%;
+	min-width: 0;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	}
+
+	.row .ifx-1, .row .ifx-2, .row .ifx-3, .row .ifx-4, .row .ifx-5, .row .ifx-6, .row .ifx-7, .row .ifx-8, .row .ifx-9, .row .ifx-10, .row .ifx-11, .row .ifx-12 {
+	width: auto;
+	float: none;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	}
+
+}
+
+
+
+.ifx-checkbox input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 0 0 20px;
+}
+.ifx-checkbox__text {
+  position: relative;
+  padding: 0 0 0 60px;
+  cursor: pointer;
+}
+.ifx-checkbox__text:before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 50px;
+  height: 26px;
+  border-radius: 13px;
+  background: #CDD1DA;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+  transition: .2s;
+}
+.ifx-checkbox__text:after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  transition: .2s;
+}
+.ifx-checkbox input:checked + .ifx-checkbox__text:before {
+  background: #9FD468;
+}
+.ifx-checkbox input:checked + .ifx-checkbox__text:after {
+  left: 26px;
+}
+.ifx-checkbox input:focus + .ifx-checkbox__text:before {
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+}
+
+.ifx-radio input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 0 0 7px;
+}
+.ifx-radio__text {
+  position: relative;
+  padding: 0 0 0 35px;
+  cursor: pointer;
+}
+.ifx-radio__text:before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #CDD1DA;
+  border-radius: 50%;
+  background: #FFF;
+}
+.ifx-radio__text:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #9FD468;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.5);
+  opacity: 0;
+  transition: .2s;
+}
+.ifx-radio input:checked + .ifx-radio__text:after {
+  opacity: 1;
+}
+.ifx-radio input:focus + .ifx-radio__text:before {
+  box-shadow: 0 0 0 3px rgba(255,255,0,.7);
+}
